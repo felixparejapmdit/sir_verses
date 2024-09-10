@@ -11,19 +11,19 @@
 
                 <h2 class="text-2xl font-semibold mb-4">Add New Verse</h2>
 
-                <!-- Verse Form -->
+            <!-- Verse Form -->
              
-                    <!-- Book Field -->
-                    <div class="mb-4">
-                        <label for="book" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Book</label>
-                        <select id="book" name="book" class="form-select mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></select>
-                    </div>
+            <!-- Book Field -->
+            <div class="mb-4">
+                <label for="book" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Book</label>
+                <select id="book" name="book" class="form-select mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></select>
+            </div>
 
              <!-- Chapter Field -->
              <div class="mb-4">
-    <label for="chapter" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Chapter</label>
-    <select id="chapter" name="chapter" class="form-select mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></select>
-</div>
+                <label for="chapter" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Chapter</label>
+                <select id="chapter" name="chapter" class="form-select mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></select>
+            </div>
 
 
                     <!-- Script with TagalogBookNames array -->
@@ -215,54 +215,49 @@ function getChaptersForBook(book) {
 
 </script>
 
+            <!-- Verse Number Field -->
+            <div class="mb-4">
+                <label for="verse_number" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Verse Number</label>
+                <input type="text" class="form-control" id="verse_number" name="verse_number" required>
+                <small id="verseNumberHelp" class="text-muted">Enter verse numbers in formats like: 1, 3-5, 1, 1-2, 1, 3-5, 7-8</small>
 
-       
+                <!-- Display validation status -->
+                <div id="verseNumberValidationStatus"></div>
+            </div>
 
-   <!-- Verse Number Field -->
-<div class="mb-4">
-    <label for="verse_number" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Verse Number</label>
-    <input type="text" class="form-control" id="verse_number" name="verse_number" required>
-    <small id="verseNumberHelp" class="text-muted">Enter verse numbers in formats like: 1, 3-5, 1, 1-2, 1, 3-5, 7-8</small>
+                <!-- Include the updated script for real-time validation -->
+                <script>
+                // Function to validate verse number
+                function validateVerseNumber(verseNumber) {
+                    // Regular expressions for valid verse number formats
+                    const validFormats = [
+                        /^\d+$/,                     // Single verse number
+                        /^\d+(-\d+)?$/,              // Range of verses
+                        ///^\d+(,\s*\d+(-\d+)?)+$/     // Comma-separated list of verses
+                        /^\d+(-\d+)?(,\s*\d+(-\d+)?)*$/  // Comma-separated list of verses
+                    ];
 
-    <!-- Display validation status -->
-    <div id="verseNumberValidationStatus"></div>
-</div>
+                    // Check if the verse number matches any valid format
+                    return validFormats.some(regex => regex.test(verseNumber.trim()));
+                }
 
-<!-- Include the updated script for real-time validation -->
-<script>
-// Function to validate verse number
-function validateVerseNumber(verseNumber) {
-    // Regular expressions for valid verse number formats
-    const validFormats = [
-        /^\d+$/,                     // Single verse number
-        /^\d+(-\d+)?$/,              // Range of verses
-        ///^\d+(,\s*\d+(-\d+)?)+$/     // Comma-separated list of verses
-        /^\d+(-\d+)?(,\s*\d+(-\d+)?)*$/  // Comma-separated list of verses
-    ];
+                    // Event listener for verse number input
+                    document.getElementById('verse_number').addEventListener('input', function () {
+                        const verseNumberInput = document.getElementById('verse_number');
+                        const validationStatus = document.getElementById('verseNumberValidationStatus');
 
-    // Check if the verse number matches any valid format
-    return validFormats.some(regex => regex.test(verseNumber.trim()));
-}
+                        // Validate verse number
+                        const isValid = validateVerseNumber(verseNumberInput.value);
 
-    // Event listener for verse number input
-    document.getElementById('verse_number').addEventListener('input', function () {
-        const verseNumberInput = document.getElementById('verse_number');
-        const validationStatus = document.getElementById('verseNumberValidationStatus');
+                        // Display validation status
+                        validationStatus.textContent = isValid ? 'Valid verse number format' : 'Invalid verse number format';
+                        validationStatus.style.color = isValid ? 'green' : 'red';
+                    });
+                </script>
 
-        // Validate verse number
-        const isValid = validateVerseNumber(verseNumberInput.value);
-
-        // Display validation status
-        validationStatus.textContent = isValid ? 'Valid verse number format' : 'Invalid verse number format';
-        validationStatus.style.color = isValid ? 'green' : 'red';
-    });
-</script>
-
-
-
-                                        <!-- Translation Field -->
-                                        <div class="mb-4">
-                        <label for="translation" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Translation</label>
+                    <!-- Translation Field -->
+                    <div class="mb-4">
+                        <label for="version" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Version</label>
                         <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="translation" name="translation" required>
                     </div>
 
@@ -273,15 +268,18 @@ function validateVerseNumber(verseNumber) {
                         <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="content" name="content" rows="4" required></textarea>
                     </div>
 
-                                        <!-- Verse Explanation Field -->
-                                        <div class="mb-4">
+                    <!-- Verse Explanation Field -->
+                    <div class="mb-4">
                         <label for="verse_explanation" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Verse Explanation</label>
                         <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="verse_explanation" name="verse_explanation" rows="4" required></textarea>
                     </div>
 
-                    <!-- Other Fields (translation, revision, date, locale, district, lesson, events) -->
-                    <!-- Adjust the form fields based on your specific attributes -->
-
+                    <!-- Translation Field -->
+                    <div class="mb-4">
+                        <label for="translation" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Translation</label>
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="translation" name="translation" required>
+                    </div>
+                
                     <!-- Submit Button -->
                     <button type="submit" class="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50">Add Verse</button>
             

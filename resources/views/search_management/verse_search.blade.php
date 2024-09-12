@@ -1,7 +1,11 @@
 <x-app-layout>
-
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-extrabold text-center mb-8 text-gray-800 tracking-wide">Verse Search</h1>
+<x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Verses') }}
+        </h2>
+    </x-slot>
+    <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
         <!-- Card Container for File Upload -->
         <div class="bg-white shadow-lg rounded-lg p-6 mb-8 max-w-3xl mx-auto">
@@ -43,9 +47,9 @@
                         <tbody class="divide-y divide-gray-200">
                             @foreach($versesData as $verseRow)
                                 <tr class="hover:bg-gray-50 transition-colors duration-300">
-                                    <td class="px-4 py-2 text-gray-700 text-sm">{!! $verseRow['verse'] !!}</td>
-                                    <td class="px-4 py-2 text-gray-700 text-sm">{!! nl2br(e($verseRow['tagalog_explanation'])) !!}</td>
-                                    <td class="px-4 py-2 text-gray-700 text-sm">{!! nl2br(e($verseRow['translation_explanation'])) !!}</td>
+                                    <td class="px-4 py-2 text-gray-700 text-sm" >{!! $verseRow['verse'] !!}</td>
+                                    <td class="px-4 py-2 text-gray-700 text-sm" style="text-align: justify;">{!! nl2br(e($verseRow['tagalog_explanation'])) !!}</td>
+                                    <td class="px-4 py-2 text-gray-700 text-sm" style="text-align: justify;">{!! nl2br(e($verseRow['translation_explanation'])) !!}</td>
                                 </tr>
                             @endforeach
                         </tbody>

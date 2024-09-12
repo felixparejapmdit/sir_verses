@@ -52,7 +52,7 @@ class VerseExtractor {
             $translationExplanation = self::getExplanationFromPreviousRows($allRows, $position, false);
 
             $versesData[] = [
-                'verse' => self::highlightVerses($verse['tagalog']),
+                'verse' => self::extractVerseFromText($verse['tagalog']) ?: self::extractVerseFromText($verse['translation']),
                 'tagalog_explanation' => $tagalogExplanation,
                 'translation_explanation' => $translationExplanation
             ];
@@ -91,46 +91,50 @@ class VerseExtractor {
         return preg_replace($pattern, '<mark>$0</mark>', $text);
     }
 
-    // Function to extract the explanation from both previous and following rows
-    private static function getExplanationFromPreviousRows($rows, $verseRowIndex, $isTagalog) {
-        $explanation = '';
-        $foundQuestion = false;
+   // Function to extract the explanation from both previous and following rows
+private static function getExplanationFromPreviousRows($rows, $verseRowIndex, $isTagalog) {
+    $explanation = '';
+    $foundQuestion = false;
+    $verseText = $isTagalog ? $rows[$verseRowIndex]['tagalog'] : $rows[$verseRowIndex]['translation'];
 
-        // Reading upwards for explanations (limit to 3-4 rows before the verse)
-        for ($i = $verseRowIndex - 1, $count = 0; $i >= 0 && $count < 4; $i--, $count++) {
-            $rowText = $isTagalog ? $rows[$i]['tagalog'] : $rows[$i]['translation'];
+    // Reading upwards for explanations (limit to 1-4 rows before the verse)
+    for ($i = $verseRowIndex - 1, $count = 0; $i >= 0 && $count < 4; $i--, $count++) {
+        $rowText = $isTagalog ? $rows[$i]['tagalog'] : $rows[$i]['translation'];
 
-            // Skip rows that end with a period initially
-            if (preg_match('/\.$/', trim($rowText))) {
-                continue;
-            }
-
-            // If the row ends with a question mark or no question has been found yet, add it to the explanation
-            if (preg_match('/\?$/', trim($rowText)) || !$foundQuestion) {
-                $explanation = trim($rowText) . ' ' . $explanation;
-                if (preg_match('/\?$/', trim($rowText))) {
-                    $foundQuestion = true;
-                }
-            }
+        // Skip rows that end with a period initially
+        if (preg_match('/\.$/', trim($rowText))) {
+            continue;
         }
 
-        // Reading downwards until another verse is found
-        for ($i = $verseRowIndex + 1; $i < count($rows); $i++) {
-            $rowText = $isTagalog ? $rows[$i]['tagalog'] : $rows[$i]['translation'];
-
-            // Stop reading when the next verse mark is found
-            if (self::extractVerseFromText($rowText)) {
-                break;
-            }
-
-            // Append rows that don't end with a period or another verse
-            if (!preg_match('/\.$/', trim($rowText))) {
-                $explanation .= ' ' . trim($rowText);
-            } else {
-                break;
+        // If the row ends with a question mark or no question has been found yet, add it to the explanation
+        if (preg_match('/\?$/', trim($rowText)) || !$foundQuestion) {
+            $explanation .= ' ' . trim($rowText);
+            if (preg_match('/\?$/', trim($rowText))) {
+                $foundQuestion = true;
             }
         }
-
-        return trim($explanation);
     }
+
+    // Append the verse to the explanation after detecting the last statement or question
+    $explanation .= ' ' . trim($verseText);
+
+    // Reading downwards until another verse is found
+    $nextVerseFound = false;
+    for ($i = $verseRowIndex + 1; $i < count($rows); $i++) {
+        $rowText = $isTagalog ? $rows[$i]['tagalog'] : $rows[$i]['translation'];
+
+        // Stop reading when the next verse mark is found
+        if (self::extractVerseFromText($rowText)) {
+            $nextVerseFound = true;
+            break;
+        }
+
+        // Append rows that don't end with a period or another verse
+        if (!$nextVerseFound) {
+            $explanation .= ' ' . trim($rowText);
+        }
+    }
+
+    return trim($explanation);
+}
 }

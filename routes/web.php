@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PvEventController;
 use App\Http\Controllers\PvEventTypeController;
 
+use App\Http\Controllers\VerseSearchController;
+
 use App\Http\Controllers\AdminController;
 
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,11 @@ Route::post('/eventtypes', [PvEventTypeController::class, 'store'])->name('event
 Route::get('/verses', function () {
     return view('verses');
 })->middleware(['auth', 'verified'])->name('verses');
+
+
+
+Route::get('/verse-search', [VerseSearchController::class, 'index'])->name('verse_search');
+Route::post('/verse-search/import', [VerseSearchController::class, 'import'])->name('import_verses');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

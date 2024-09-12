@@ -61,7 +61,11 @@
         </button>
         <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-md hidden" id="dropdown-menu">
             <div class="py-1">
-                <!-- Hymn Create Link -->
+            <!-- Search Verses -->
+    <a href="{{ route('verse_search') }}" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+        {{ __('Search Verses') }}
+    </a>
+                <!-- Hymn Add verse -->
                 <a href="{{ route('verses') }}" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                     {{ __('Verses') }}
                 </a>

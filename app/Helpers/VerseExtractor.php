@@ -52,7 +52,7 @@ class VerseExtractor {
             $translationExplanation = self::getExplanationFromPreviousRows($allRows, $position, false);
 
             $versesData[] = [
-                'verse' => self::extractVerseFromText($verse['tagalog']) ?: self::extractVerseFromText($verse['translation']),
+                'verse' => self::highlightVerses($verse['tagalog']),
                 'tagalog_explanation' => $tagalogExplanation,
                 'translation_explanation' => $translationExplanation
             ];
@@ -91,7 +91,9 @@ class VerseExtractor {
         return preg_replace($pattern, '<mark>$0</mark>', $text);
     }
 
-   // Function to extract the explanation from both previous and following rows
+    // Function to extract the explanation from both previous and following rows
+ // Function to extract the explanation from both previous and following rows
+// Function to extract the explanation from both previous and following rows
 private static function getExplanationFromPreviousRows($rows, $verseRowIndex, $isTagalog) {
     $explanation = '';
     $foundQuestion = false;
@@ -101,14 +103,17 @@ private static function getExplanationFromPreviousRows($rows, $verseRowIndex, $i
     for ($i = $verseRowIndex - 1, $count = 0; $i >= 0 && $count < 4; $i--, $count++) {
         $rowText = $isTagalog ? $rows[$i]['tagalog'] : $rows[$i]['translation'];
 
-        // Skip rows that end with a period initially
+        // If the row ends with a period, stop reading upwards
         if (preg_match('/\.$/', trim($rowText))) {
-            continue;
+            break;
         }
 
         // If the row ends with a question mark or no question has been found yet, add it to the explanation
         if (preg_match('/\?$/', trim($rowText)) || !$foundQuestion) {
-            $explanation .= ' ' . trim($rowText);
+            // Ensure that duplicate rows are not included
+            if (strpos($explanation, trim($rowText)) === false) {
+                $explanation = trim($rowText) . ' ' . $explanation;
+            }
             if (preg_match('/\?$/', trim($rowText))) {
                 $foundQuestion = true;
             }
@@ -129,12 +134,17 @@ private static function getExplanationFromPreviousRows($rows, $verseRowIndex, $i
             break;
         }
 
-        // Append rows that don't end with a period or another verse
-        if (!$nextVerseFound) {
+        // Ensure that repeated rows are cleared out or not added again
+        if (strpos($explanation, trim($rowText)) === false) {
             $explanation .= ' ' . trim($rowText);
+        } else {
+            // Clear out the repeated row
+            $explanation = str_replace(trim($rowText), '', $explanation);
         }
     }
 
     return trim($explanation);
 }
+
+
 }

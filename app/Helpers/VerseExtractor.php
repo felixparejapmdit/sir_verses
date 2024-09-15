@@ -52,7 +52,7 @@ class VerseExtractor {
             $translationExplanation = self::getExplanationFromPreviousRows($allRows, $position, false);
 
             $versesData[] = [
-                'verse' => self::highlightVerses($verse['tagalog']),
+                'verse' => self::extractVerseFromText($verse['tagalog']) ?: self::extractVerseFromText($verse['translation']),
                 'tagalog_explanation' => $tagalogExplanation,
                 'translation_explanation' => $translationExplanation
             ];
@@ -91,8 +91,6 @@ class VerseExtractor {
         return preg_replace($pattern, '<mark>$0</mark>', $text);
     }
 
-    // Function to extract the explanation from both previous and following rows
- // Function to extract the explanation from both previous and following rows
 // Function to extract the explanation from both previous and following rows
 private static function getExplanationFromPreviousRows($rows, $verseRowIndex, $isTagalog) {
     $explanation = '';

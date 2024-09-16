@@ -5,14 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Translation extends Model
+class LocaleCongregation extends Model
 {
     use HasFactory;
 
-    protected $table = 'translations';
+    protected $table = 'locale_congregations';
 
     protected $fillable = [
-        'abbrev',
         'name',
+        'district_id',
     ];
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
 }

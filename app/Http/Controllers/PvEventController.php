@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\PvEvent;
 use Illuminate\Http\Request;
 
@@ -14,28 +13,29 @@ class PvEventController extends Controller
         return view('events', compact('events'));
     }
 
-    public function create()
-    {
-        $events = PvEvent::all();
-        return view('events', compact('events'));
-    }
-
     public function store(Request $request)
     {
-        // Validate and store the data
-        // Add your validation and storage logic here
-    }
+        $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
 
-    public function edit($id)
-    {
-        $event = PvEvent::findOrFail($id);
-        return view('events.edit', compact('event'));
+        PvEvent::create($request->all());
+
+        return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }
 
     public function update(Request $request, $id)
     {
-        // Validate and update the data
-        // Add your validation and update logic here
+        $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $event = PvEvent::findOrFail($id);
+        $event->update($request->all());
+
+        return redirect()->route('events.index')->with('success', 'Event updated successfully.');
     }
 
     public function destroy($id)
@@ -43,6 +43,6 @@ class PvEventController extends Controller
         $event = PvEvent::findOrFail($id);
         $event->delete();
 
-        return redirect()->route('events.index')->with('success', 'Event deleted successfully');
+        return redirect()->route('events.index')->with('success', 'Event deleted successfully.');
     }
 }

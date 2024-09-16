@@ -5,6 +5,16 @@ use App\Http\Controllers\PvEventController;
 use App\Http\Controllers\PvEventTypeController;
 use App\Http\Controllers\UserController;
 
+
+use App\Http\Controllers\DistrictController;
+
+use App\Http\Controllers\LocaleCongregationController;
+
+use App\Http\Controllers\PvLessonController;
+use App\Http\Controllers\TranslationController;
+
+use App\Http\Controllers\PvInfoController;
+
 use App\Http\Controllers\VerseSearchController;
 
 use App\Http\Controllers\GroupController;
@@ -43,15 +53,45 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/events', [PvEventController::class, 'index'])->name('events.index');
-Route::get('/events/create', [PvEventController::class, 'create'])->name('events.create');
-Route::put('/events/{id}', [PvEventController::class, 'update'])->name('events.update');
 Route::post('/events', [PvEventController::class, 'store'])->name('events.store');
+Route::put('/events/{id}', [PvEventController::class, 'update'])->name('events.update');
+Route::delete('/events/{id}', [PvEventController::class, 'destroy'])->name('events.destroy');
 
 
+// Routes for Event Types
 Route::get('/eventtypes', [PvEventTypeController::class, 'index'])->name('eventtypes.index');
-Route::get('/eventtypes/create', [PvEventTypeController::class, 'create'])->name('eventtypes.create');
-Route::put('/eventtypes/{id}', [PvEventTypeController::class, 'update'])->name('eventtypes.update');
 Route::post('/eventtypes', [PvEventTypeController::class, 'store'])->name('eventtypes.store');
+Route::put('/eventtypes/{eventtype}', [PvEventTypeController::class, 'update'])->name('eventtypes.update');
+Route::delete('/eventtypes/{eventtype}', [PvEventTypeController::class, 'destroy'])->name('eventtypes.destroy');
+
+// District routes
+Route::get('/districts', [DistrictController::class, 'index'])->name('districts.index');
+Route::post('/districts', [DistrictController::class, 'store'])->name('districts.store');
+Route::put('/districts/{district}', [DistrictController::class, 'update'])->name('districts.update');
+Route::delete('/districts/{district}', [DistrictController::class, 'destroy'])->name('districts.destroy');
+
+// Locale Congregations routes
+Route::get('/locale_congregations', [LocaleCongregationController::class, 'index'])->name('locale_congregations.index');
+Route::post('/locale_congregations', [LocaleCongregationController::class, 'store'])->name('locale_congregations.store');
+Route::put('/locale_congregations/{localeCongregation}', [LocaleCongregationController::class, 'update'])->name('locale_congregations.update');
+Route::delete('/locale_congregations/{localeCongregation}', [LocaleCongregationController::class, 'destroy'])->name('locale_congregations.destroy');
+
+
+Route::get('/lessons', [PvLessonController::class, 'index'])->name('lessons.index');
+Route::post('/lessons', [PvLessonController::class, 'store'])->name('lessons.store');
+Route::put('/lessons/{lesson}', [PvLessonController::class, 'update'])->name('lessons.update');
+Route::delete('/lessons/{lesson}', [PvLessonController::class, 'destroy'])->name('lessons.destroy');
+
+Route::get('/translations', [TranslationController::class, 'index'])->name('translations.index');
+Route::post('/translations', [TranslationController::class, 'store'])->name('translations.store');
+Route::put('/translations/{translation}', [TranslationController::class, 'update'])->name('translations.update');
+Route::delete('/translations/{translation}', [TranslationController::class, 'destroy'])->name('translations.destroy');
+
+
+Route::get('/pvinfo', [PvInfoController::class, 'index'])->name('pvinfo.index');
+Route::post('/pvinfo', [PvInfoController::class, 'store'])->name('pvinfo.store');
+Route::put('/pvinfo/{pvInfo}', [PvInfoController::class, 'update'])->name('pvinfo.update');
+Route::delete('/pvinfo/{pvInfo}', [PvInfoController::class, 'destroy'])->name('pvinfo.destroy');
 
 Route::get('/verses', function () {
     return view('verses');

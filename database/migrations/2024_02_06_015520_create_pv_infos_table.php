@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('district_id', 100);
             $table->string('local_id', 100);
             $table->tinyInteger('is_locked');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

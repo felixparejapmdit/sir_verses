@@ -15,6 +15,7 @@ class PvEventType extends Model
     protected $fillable = [
         'pv_event_id',
         'name',
+        'description',
     ];
 
     public function pvEvent()

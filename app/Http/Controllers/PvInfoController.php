@@ -2,62 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PvInfo;
+use App\Models\PvEvent;
+use App\Models\PvEventType;
 use Illuminate\Http\Request;
 
 class PvInfoController extends Controller
 {
     public function index()
     {
-        $pvInfos = PvInfo::all();
-        return view('pvinfo.index', compact('pvInfos'));
-    }
+        $pvInfos = PvInfo::with(['pvEvent', 'pvEventType'])->get();
+        $events = PvEvent::all();
+        $eventTypes = PvEventType::all();
 
-    public function create()
-    {
-        // Assuming you have a form to create PvInfo, create.blade.php
-        return view('pvinfo.create');
+        return view('pvinfo', compact('pvInfos', 'events', 'eventTypes'));
     }
 
     public function store(Request $request)
     {
-        // Validate the request and store the PvInfo
-        $validatedData = $request->validate([
-            'pv_event_id' => 'required',
-            'pv_event_type_id' => 'required',
-            // Add other validation rules based on your columns
-        ]);
+        PvInfo::create($request->all());
 
-        PvInfo::create($validatedData);
-
-        return redirect()->route('pvinfo.index')->with('success', 'PvInfo created successfully!');
+        return redirect()->route('pvinfo.index')->with('success', 'Pv Info created successfully');
     }
 
-    public function edit($id)
+    public function update(Request $request, PvInfo $pvInfo)
     {
-        $pvInfo = PvInfo::findOrFail($id);
-        return view('pvinfo.edit', compact('pvInfo'));
+        $pvInfo->update($request->all());
+
+        return redirect()->route('pvinfo.index')->with('success', 'Pv Info updated successfully');
     }
 
-    public function update(Request $request, $id)
+    public function destroy(PvInfo $pvInfo)
     {
-        // Validate the request and update the PvInfo
-        $validatedData = $request->validate([
-            'pv_event_id' => 'required',
-            'pv_event_type_id' => 'required',
-            // Add other validation rules based on your columns
-        ]);
-
-        $pvInfo = PvInfo::findOrFail($id);
-        $pvInfo->update($validatedData);
-
-        return redirect()->route('pvinfo.index')->with('success', 'PvInfo updated successfully!');
-    }
-
-    public function destroy($id)
-    {
-        $pvInfo = PvInfo::findOrFail($id);
         $pvInfo->delete();
 
-        return redirect()->route('pvinfo.index')->with('success', 'PvInfo deleted successfully!');
+        return redirect()->route('pvinfo.index')->with('success', 'Pv Info deleted successfully');
     }
 }

@@ -18,9 +18,10 @@ class PvInfo extends Model
         'event_date',
         'event_time',
         'event_location',
-        'district',
-        'locale',
+        'district_id',
+        'local_id',
         'is_locked',
+        'description',
     ];
 
     public function pvEvent()

@@ -13,5 +13,6 @@ class PvEvent extends Model
 
     protected $fillable = [
         'name',
+        'description',
     ];
 }

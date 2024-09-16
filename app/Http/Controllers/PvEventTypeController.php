@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PvEvent;
 use App\Models\PvEventType;
 use Illuminate\Http\Request;
 
@@ -9,45 +10,47 @@ class PvEventTypeController extends Controller
 {
     public function index()
     {
-        $eventtypes  = PvEventType::all();
+        $eventtypes = PvEventType::with('pvEvent')->get(); // Load related event
+        $events = PvEvent::all(); // Get the events for the dropdown
 
-        return view('eventtypes', compact('eventtypes'));
-    }
-
-    public function create()
-    {
-        // Add logic if needed
-        $eventtypes = PvEventType::all();
-
-        return view('eventtypes', compact('eventtypes'));
+        return view('eventtypes', compact('eventtypes', 'events'));
     }
 
     public function store(Request $request)
     {
+        // Validate the data
+        $request->validate([
+            'pv_event_id' => 'required|exists:pv_events,id', // Event must exist
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        // Create new event type
         PvEventType::create($request->all());
 
-        // Add logic or redirect if needed
-        return redirect()->route('pveventtypes.index');
+        return redirect()->route('eventtypes.index')->with('success', 'Event type added successfully');
     }
 
-    public function edit(PvEventType $pvEventType)
+    public function update(Request $request, PvEventType $eventtype)
     {
-        return view('pveventtypes.edit', compact('pvEventType'));
+        // Validate the data
+        $request->validate([
+            'pv_event_id' => 'required|exists:pv_events,id', // Event must exist
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        // Update the event type
+        $eventtype->update($request->all());
+
+        return redirect()->route('eventtypes.index')->with('success', 'Event type updated successfully');
     }
 
-    public function update(Request $request, PvEventType $pvEventType)
+    public function destroy(PvEventType $eventtype)
     {
-        $pvEventType->update($request->all());
+        // Delete the event type
+        $eventtype->delete();
 
-        // Add logic or redirect if needed
-        return redirect()->route('pveventtypes.index');
-    }
-
-    public function destroy(PvEventType $pvEventType)
-    {
-        $pvEventType->delete();
-
-        // Add logic or redirect if needed
-        return redirect()->route('pveventtypes.index');
+        return redirect()->route('eventtypes.index')->with('success', 'Event type deleted successfully');
     }
 }

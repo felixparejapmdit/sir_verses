@@ -18,5 +18,9 @@ class ActivityLog extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function music()
+    {
+        return $this->belongsTo(Music::class, 'model_id');
+    }
 
 }

@@ -22,112 +22,19 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="d-flex flex-wrap">
 
-                        <!-- List of Categories -->
-                        @if (\App\Helpers\AccessRightsHelper::checkPermission('categories.view') == 'inline')
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px;  border-radius: 15px;">
-                                <div class="box-body text-center mt-4">
-                                    <h5>
-                                        <a href="{{ route('categories.index') }}" class="settings_button">
-                                            <i class="fas fa-tags fa-4x icon" aria-hidden="true"></i>
-                                            <br><br>
-                                            <span class="name">Categories</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">categories, management</span>
-                                        </a>
-                                    </h5>
-                                    <p class="help-block" style="display:none">Manage categories</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-
-                        <!-- List of Instrumentations -->
-                        @if (\App\Helpers\AccessRightsHelper::checkPermission('instrumentations.view') == 'inline')
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
-                                <div class="box-body text-center mt-4">
-                                    <h5>
-                                        <a href="{{ route('instrumentations.index') }}" class="settings_button">
-                                            <i class="fas fa-sliders-h fa-4x icon" aria-hidden="true"></i>
-                                            <br><br>
-                                            <span class="name">Instrumentations</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">instrumentations, management</span>
-                                        </a>
-                                    </h5>
-                                    <p class="help-block" style="display:none">Manage instrumentations</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-
-                        <!-- List of Ensemble Types -->
-                        @if (\App\Helpers\AccessRightsHelper::checkPermission('ensemble_types.view') == 'inline')
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
-                                <div class="box-body text-center mt-4">
-                                    <h5>
-                                        <a href="{{ route('ensemble_types.index') }}" class="settings_button">
-                                        <i class="fas fa-microphone-alt fa-4x icon" aria-hidden="true"></i>
-                                            <br><br>
-                                            <span class="name">Ensemble Types</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">ensemble types, management</span>
-                                        </a>
-                                    </h5>
-                                    <p class="help-block" style="display:none">Manage ensemble types</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-
-                        <!-- List of Credits -->
-                        @if (\App\Helpers\AccessRightsHelper::checkPermission('credits.view') == 'inline')
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
-                                <div class="box-body text-center mt-4">
-                                    <h5>
-                                        <a href="{{ route('credits.index') }}" class="settings_button">
-                                            <i class="fas fa-credit-card fa-4x icon" aria-hidden="true"></i>
-                                            <br><br>
-                                            <span class="name">Credits</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">credits, management</span>
-                                        </a>
-                                    </h5>
-                                    <p class="help-block" style="display:none">Manage credits</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-
-                           <!-- List of Church Hymns -->
+                           <!-- List of Import Docx -->
                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
                                 <div class="box-body text-center mt-4">
                                     <h5>
-                                        <a href="{{ route('events.index') }}" class="settings_button">
-                                        <i class="fas fa-music fa-4x icon" aria-hidden="true"></i>
+                                        <a href="{{ route('verse_search') }}" class="settings_button">
+                                        <i class="fas fa-file-word fa-4x icon" aria-hidden="true"></i>
                                             <br><br>
-                                            <span class="name">Church Hymns</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">church_hymns, management</span>
+                                            <span class="name">Import Word Docx</span>
+                                            <span class="keywords" aria-hidden="true" style="display:none">Import_Docx, management</span>
                                         </a>
                                     </h5>
                                     <p class="help-block" style="display:none">Manage Church Hymns</p>
-                                </div>
-                            </div>
-                        </div>
-
-                            <!-- List of Playlist -->
-                           <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
-                                <div class="box-body text-center mt-4">
-                                    <h5>
-                                        <a href="{{ route('events.index') }}" class="settings_button">
-                                        <i class="fab fa-spotify fa-4x icon" aria-hidden="true"></i>
-                                            <br><br>
-                                            <span class="name">Playlist</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">events, management</span>
-                                        </a>
-                                    </h5>
-                                    <p class="help-block" style="display:none">Manage Playlist</p>
                                 </div>
                             </div>
                         </div>
@@ -138,9 +45,9 @@
                                 <div class="box-body text-center mt-4">
                                     <h5>
                                         <a href="{{ route('events.index') }}" class="settings_button">
-                                        <i class="fas fa-language fa-4x icon" aria-hidden="true"></i>
+                                        <i class="fas fa-calendar fa-4x icon" aria-hidden="true"></i>
                                             <br><br>
-                                            <span class="name">events</span>
+                                            <span class="name">Events</span>
                                             <span class="keywords" aria-hidden="true" style="display:none">events, management</span>
                                         </a>
                                     </h5>
@@ -150,8 +57,7 @@
                         </div>
 
                         <!-- List of Permissions -->
-                        @if (\App\Helpers\AccessRightsHelper::checkPermission('permissions.view') == 'inline')
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
                                 <div class="box-body text-center mt-4">
                                     <h5>
@@ -166,9 +72,9 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        @if (\App\Helpers\AccessRightsHelper::checkPermission('permissions.view') == 'inline')
                         
-                        @if (\App\Helpers\AccessRightsHelper::checkPermission('permission_categories.view') == 'inline')
+                        @endif
                         <!-- List of Permissions Categories -->
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
@@ -185,10 +91,9 @@
                                 </div>
                             </div>
                         </div>
+                        @if (\App\Helpers\AccessRightsHelper::checkPermission('permission_categories.view') == 'inline')
+                        
                         @endif  
-
-                        <!-- List of Groups -->
-                        @if (\App\Helpers\AccessRightsHelper::checkPermission('groups.view') == 'inline')
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
                                 <div class="box-body text-center mt-4">
@@ -204,11 +109,12 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- List of Groups -->
+                        @if (\App\Helpers\AccessRightsHelper::checkPermission('groups.view') == 'inline')
+                 
                         @endif  
 
-                        <!-- List of Users -->
-                        @if (\App\Helpers\AccessRightsHelper::checkPermission('users.view') == 'inline')
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
                                 <div class="box-body text-center mt-4">
                                     <h5>
@@ -223,6 +129,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- List of Users -->
+                        @if (\App\Helpers\AccessRightsHelper::checkPermission('users.view') == 'inline')
+                    
                         @endif
 
                         <!-- List of Activity Logs -->

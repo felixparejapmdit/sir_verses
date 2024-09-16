@@ -3,8 +3,17 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PvEventController;
 use App\Http\Controllers\PvEventTypeController;
+use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\VerseSearchController;
+
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PermissionCategoryController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ApiDocumentationController;
+use App\Http\Controllers\ActivityLogController;
 
 use App\Http\Controllers\AdminController;
 
@@ -24,6 +33,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth/login');
 });
+
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->name('register'); // No middleware to allow access for both guests and authenticated users
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -55,9 +68,31 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
 Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+
+Route::resource('permissions', PermissionController::class);
+Route::get('permissions/show', [PermissionController::class, 'showPermissions'])->name('permissions.show');
+
+Route::get('/users', action: [UserController::class, 'index'])->name('users.index');
+
+Route::resource('users', UserController::class);
+
+Route::resource('groups', GroupController::class);
+
+Route::get('groups/{group}/users', [GroupController::class, 'showUsers'])->name('groups.users');
+
+Route::resource('permission_categories', PermissionCategoryController::class);
+
+Route::get('api_documentations', [ApiDocumentationController::class, 'index'])->name('api_documentations.index');
+Route::get('api_documentations/create', [ApiDocumentationController::class, 'create'])->name('api_documentations.create');
+Route::post('api_documentations', [ApiDocumentationController::class, 'store'])->name('api_documentations.store');
+Route::get('api_documentations/{api_documentation}/edit', [ApiDocumentationController::class, 'edit'])->name('api_documentations.edit');
+Route::put('api_documentations/{api_documentation}', [ApiDocumentationController::class, 'update'])->name('api_documentations.update');
+Route::delete('api_documentations/{api_documentation}', [ApiDocumentationController::class, 'destroy'])->name('api_documentations.destroy');
+
+
+Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity_logs.index');
+Route::get('activity-logs/{id}', [ActivityLogController::class, 'show'])->name('activity_logs.show');
 
 
 require __DIR__.'/auth.php';

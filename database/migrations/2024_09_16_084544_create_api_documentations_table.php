@@ -9,13 +9,11 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+   public function up(): void
     {
-        Schema::create('permission_categories', function (Blueprint $table) {
+        Schema::create('api_documentations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('permission_id')->constrained('permissions')->onDelete('cascade')->nullable();
-            $table->foreignId('category_id')->constrained('permission_categories')->onDelete('cascade')->nullable();
-            $table->string('name', 255);
+            $table->string('endpoint', 255); 
             $table->text('description')->nullable();
             $table->timestamps();
         });
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permission_categories');
+        Schema::dropIfExists('api_documentations');
     }
 };

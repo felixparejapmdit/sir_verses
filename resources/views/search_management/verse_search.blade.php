@@ -5,28 +5,29 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-  <!-- Card Container for File Upload -->
-<div class="bg-white shadow-lg rounded-lg p-6 mb-8 max-w-3xl mx-auto text-center">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4">Import Verses</h3>
-    <!-- Form for file upload -->
-    <form action="{{ route('import_verses') }}" method="POST" enctype="multipart/form-data" class="space-y-6" onsubmit="return validateFileInput()">
-        @csrf
-        <div class="flex items-center justify-center space-x-4">
-            <div class="flex-grow">
-                <label for="file" class="sr-only">Upload DOCX File</label>
-                <input type="file" name="file" id="file" accept=".docx" 
-                       class="w-full p-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 hover:bg-blue-100 transition-all">
-            </div>
-            <button type="submit" 
-                    class="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-black font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
-                Import
-            </button>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8\">
+
+        <!-- Card Container for File Upload with additional top margin -->
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-2 max-w-3xl mx-auto text-center mt-12"> <!-- Added 'mt-8' class -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4 mt-4">Import Verses</h3>
+            <!-- Form for file upload -->
+            <form action="{{ route('import_verses') }}" method="POST" enctype="multipart/form-data" class="space-y-6" onsubmit="return validateFileInput()">
+                @csrf
+                <div class="flex items-center justify-center space-x-4">
+                    <div class="flex-grow">
+                        <label for="file" class="sr-only">Upload DOCX File</label>
+                        <input type="file" name="file" id="file" accept=".docx" 
+                               class="w-full p-3 border border-gray-300 rounded-lg shadow-sm text-gray-700 bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 hover:bg-blue-100 transition-all">
+                    </div>
+                    <button type="submit" 
+                            class="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-black font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                        Import
+                    </button>
+                </div>
+                <!-- Validation Error Message -->
+                <p id="file-error-message" class="text-red-500 text-sm mt-2 hidden">Please select a DOCX file to upload.</p>
+            </form>
         </div>
-        <!-- Validation Error Message -->
-        <p id="file-error-message" class="text-red-500 text-sm mt-2 hidden">Please select a DOCX file to upload.</p>
-    </form>
-</div>
 
         <!-- Display Table if Data Exists -->
         @if(isset($versesData))

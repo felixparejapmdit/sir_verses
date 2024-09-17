@@ -18,7 +18,7 @@
             </div>
 
             <!-- Search Bar -->
-            <div class="flex-1 flex justify-center mt-3">
+            <div class="flex-1 flex justify-center mt-2">
                 <form action="{{ route('verse_search') }}" method="GET">
                     <div class="flex items-center">
                         <input type="text" name="query" placeholder="Search..." class="w-full py-2 pl-10 text-sm text-gray-700 dark:text-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600">
@@ -31,6 +31,30 @@
                 </form>
             </div>
 
+
+            <!-- Announcements/Notifications Section -->
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button class="flex items-center text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 hover:border-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-100 focus:border-gray-300 transition duration-150 ease-in-out">
+                            <div>Notifications</div>
+                            <div class="ml-1">
+                                <svg class="h-4 w-4 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M10 2a6 6 0 00-6 6v5.586L2.293 15.293a1 1 0 001.414 1.414L10 12.414l6.293 6.293a1 1 0 001.414-1.414L16 13.586V8a6 6 0 00-6-6z" />
+                                </svg>
+                            </div>
+                        </button>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <div class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-400">
+                            No new notifications.
+                        </div>
+                    </x-slot>
+                </x-dropdown>
+            </div>
+
+            
             <!-- Navigation Links -->
             <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex hidden" style="display:none;">
 

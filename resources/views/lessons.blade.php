@@ -7,15 +7,29 @@
         </h2>
     </x-slot>
 
+                    <x-slot name="header">
+        <div class="flex justify-between items-center my-8">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Categories Management') }}
+            </h2>
+            <div>
+                
+            <a href="{{ route('admin.settings') }}" class="btn btn-secondary">Back</a>
+                      <!-- Add New Lesson Button -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLessonModal">
+                            <i class="fas fa-plus"></i> Lesson
+                        </button>
+
+        </div>
+</x-slot>
+
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="table-responsive" style="margin-top:80px;">
-                        <!-- Add New Lesson Button -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLessonModal" style="margin-bottom:20px;">
-                            <i class="fas fa-plus"></i> Add Lesson
-                        </button>
+                    
 
                         <!-- Lessons Table -->
                         <table class="table table-striped">

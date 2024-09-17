@@ -62,6 +62,63 @@
                             </div>
                         </div>
 
+                        
+                        <!-- List of PV Information -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
+                                <div class="box-body text-center mt-4">
+                                    <h5>
+                                        <a href="{{ route('pvinfo.index') }}" class="settings_button">
+                                            <i class="fas fa-info-circle fa-4x icon" aria-hidden="true"></i>
+                                            <br><br>
+                                            <span class="name">PV Information</span>
+                                            <span class="keywords" aria-hidden="true" style="display:none">PV Information, management</span>
+                                        </a>
+                                    </h5>
+                                    <p class="help-block" style="display:none">Manage PV Information</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                        <!-- List of lessons -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
+                                <div class="box-body text-center mt-4">
+                                    <h5>
+                                        <a href="{{ route('lessons.index') }}" class="settings_button">
+                                            <i class="fas fa-book-reader fa-4x icon" aria-hidden="true"></i>
+                                            <br><br>
+                                            <span class="name">Lessons</span>
+                                            <span class="keywords" aria-hidden="true" style="display:none">lessons, management</span>
+                                        </a>
+                                    </h5>
+                                    <p class="help-block" style="display:none">Manage lessons</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <!-- List of translations -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
+                                <div class="box-body text-center mt-4">
+                                    <h5>
+                                        <a href="{{ route('translations.index') }}" class="settings_button">
+                                            <i class="fas fa-language fa-4x icon" aria-hidden="true"></i>
+                                            <br><br>
+                                            <span class="name">Translations</span>
+                                            <span class="keywords" aria-hidden="true" style="display:none">translations, management</span>
+                                        </a>
+                                    </h5>
+                                    <p class="help-block" style="display:none">Manage translations</p>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <!-- List of districts -->
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
@@ -92,57 +149,6 @@
                                         </a>
                                     </h5>
                                     <p class="help-block" style="display:none">Manage locale_congregations</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- List of lessons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
-                                <div class="box-body text-center mt-4">
-                                    <h5>
-                                        <a href="{{ route('lessons.index') }}" class="settings_button">
-                                            <i class="fas fa-book-reader fa-4x icon" aria-hidden="true"></i>
-                                            <br><br>
-                                            <span class="name">Lessons</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">lessons, management</span>
-                                        </a>
-                                    </h5>
-                                    <p class="help-block" style="display:none">Manage lessons</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- List of translations -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
-                                <div class="box-body text-center mt-4">
-                                    <h5>
-                                        <a href="{{ route('translations.index') }}" class="settings_button">
-                                            <i class="fas fa-language fa-4x icon" aria-hidden="true"></i>
-                                            <br><br>
-                                            <span class="name">Translations</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">translations, management</span>
-                                        </a>
- </h5>
-                                    <p class="help-block" style="display:none">Manage translations</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- List of PV Information -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="box box-default" style="border: 2px solid #bbb; margin: 10px; border-radius: 15px;">
-                                <div class="box-body text-center mt-4">
-                                    <h5>
-                                        <a href="{{ route('pvinfo.index') }}" class="settings_button">
-                                            <i class="fas fa-info-circle fa-4x icon" aria-hidden="true"></i>
-                                            <br><br>
-                                            <span class="name">PV Information</span>
-                                            <span class="keywords" aria-hidden="true" style="display:none">PV Information, management</span>
-                                        </a>
-                                    </h5>
-                                    <p class="help-block" style="display:none">Manage PV Information</p>
                                 </div>
                             </div>
                         </div>

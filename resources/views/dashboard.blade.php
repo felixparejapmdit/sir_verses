@@ -107,6 +107,9 @@
     <div class="py-12">
         <div class="dashboard-container">
 
+
+
+        
             <!-- Ordained Ministers Chart -->
             <div class="chart-box wide-box">
                 <h2 class="chart-title">Ordained Ministers (2009-2024)</h2>
